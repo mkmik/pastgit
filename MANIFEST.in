@@ -1,0 +1,2 @@
+recursive-include pastgit/public *
+recursive-include pastgit/templates *
