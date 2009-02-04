@@ -28,9 +28,7 @@ session.save()
       % endif
     </div>
     <h1 id="header"><span>Pastgit - Paste with the power of git</span></h1>
-%if self.subtitle():
     <h2><span>${self.subtitle()}</span></h2>
-%endif
     <div id="content">
       ${next.body()}
     </div>
