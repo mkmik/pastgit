@@ -7,7 +7,12 @@
   <head>
     <meta http-equiv=content-type content="text/html; charset=UTF-8">
     <title>${self.title()}</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+
+    <script type="text/javascript" src="/js/pastgit.js"></script>
+
     ${h.stylesheet_link_tag("/css/common.css")}
+    ${h.stylesheet_link_tag("/css/pastgit.css")}
   </head>
   <body>
     <div id="nav">

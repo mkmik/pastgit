@@ -1,0 +1,26 @@
+#content input.fileName {
+  display: none;
+}
+
+#content .languageBox {
+ float: right;
+}
+
+#content .file {
+  margin-right: 40px;
+ }
+
+#content .file textarea {
+  height: 25em;
+  width: 100%;
+ }
+
+#content .addFileButton {
+    float:left;
+}
+
+#content .pasteButton {
+    float:right;
+    text-align:right;
+    margin-right: 40px;
+}
