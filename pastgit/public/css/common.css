@@ -1,0 +1,132 @@
+body, td, div, .p, a {
+	font-family:arial,sans-serif;
+	margin: 0px;
+}
+
+#nav {
+  border-bottom: 1px solid #c9d7f1;
+  padding-top: 2px;
+  padding-right: 10px;
+  padding-bottom: 4px;
+  font-size: 84%;
+}
+
+#content {
+  margin-left: 22px;
+}
+
+#content input,
+#content textarea {
+  border: 1px solid #bebebe;
+  width: 280px;
+}
+
+#content textarea[name="sshPublicKey"] {
+  height: 6em;
+}
+
+#content tr.password td {
+  padding-top: 10px;
+  border-top: 1px solid #c9d7f1;
+}
+
+#messageBox .message {
+  margin: 14px;
+  border: 1px solid #a0bea0;
+  background-color: #bebefe;
+  padding: 4px;
+  padding-left: 8px;
+}
+
+#messageBox .success {
+  background-color: #befebe;
+}
+
+#messageBox .failure {
+  background-color: #febebe;
+}
+
+.mandatory {
+  color: red;
+}
+
+.doc {
+  font-size: 90%;
+  color: #666;
+}
+
+.doc a {
+  color: #666;
+}
+
+span.doc {
+  font-size: 80%;
+}
+
+#banner {
+  float: right;
+  text-align: right;
+  padding-right: 18px;
+  
+  padding-top: 4px;
+  padding-bottom: 4px;
+  
+  margin-top: 18px;
+  
+  border-left: 1px solid #c9d7f1;
+  padding-left: 12px;
+  margin-left: 30px;
+}
+
+#hosted {
+  color: #666;
+  font-size: 10px;
+  padding-top: 8px;
+}
+
+#banner div {
+  border-bottom: 1px solid #c9d7f1;
+}
+
+#banner div#capacities {
+  padding-bottom: 2px;
+  margin-bottom: 6px;
+}
+
+#banner div#einfra {
+  padding-bottom: 8px;
+  margin-bottom: 2px;
+}
+
+
+#banner div#hosted {
+  border-bottom: none;
+  padding-right: 2px;
+}
+
+h1#header {
+  position: absolute;
+  padding-top: 0px;
+  margin-top: 0px;
+  top: 2px;
+  left: 2px;
+  margin-left: 14px;
+  
+  font-size: 12pt;
+  font-weight: normal;
+}
+
+h2 {
+  margin-left: 14px;
+  color: green;
+}
+
+h1#header span {
+  /*border-bottom: 1px solid #c9d7f1; */
+}
+
+
+h2 span {
+  border-bottom: 1px solid #c9d7f1;
+}
+
