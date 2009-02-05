@@ -11,7 +11,15 @@ class DashboardController(BaseController):
 
     @rest.dispatch_on(POST='_postPaste')
     def index(self):
+        c.fileId = 0
         return render("newpaste")
+
+    def pasteBox(self, id = None):
+        if id == None:
+            c.fileId = 0
+        else:
+            c.fileId = id
+        return render("pasteBox")
 
     def _postPaste(self):
         post = variabledecode.variable_decode(request.POST)

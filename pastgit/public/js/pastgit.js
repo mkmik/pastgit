@@ -1,17 +1,17 @@
 console.log("loading");
 
+function setupEvents(context) {
+    $("a.fileName", context).click(function() {
+	    showFileName(this);
+	});
+
+    $(".addFileButton a", context).click(function() {
+	    addFile();
+	});
+}
+
 $(document).ready(function() {
-	console.log("ready");
-
-	$("a.fileName").click(function() {
-		showFileName(this);
-	    });
-
-	$(".addFileButton a").click(function() {
-		addFile();
-	    });
-
-	console.log("finish");
+	setupEvents($(document));
     });
 
 
@@ -27,9 +27,8 @@ currentFileId = 1;
 
 function addFile() {
     console.log("adding file");
-    var copy = $("#files > .file").html();
-    copy = '<div class="file">' + copy + '</div>';
-    var newhtml = copy.replace(/-0/g, "-" + currentFileId++);
-
-    $("#files").append(newhtml);
+    $.get("/dashboard/pasteBox/" + currentFileId++, {}, function(data) {
+	    $("#files").append(data);
+	    setupEvents($("#files .file:last-child"));
+	});
 }
