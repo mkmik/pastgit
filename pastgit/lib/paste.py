@@ -19,10 +19,6 @@ class Paste(object):
         git = Git(self.wcname)
         git.init()
 
-        #f = open(self.wcname + "/.gitignore", "w")
-        #print >>f, "*~"
-        #f.close()
-
         for pos, name, body in content:
             fname = name
             if not fname:
