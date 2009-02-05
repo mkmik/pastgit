@@ -1,2 +1,4 @@
 Pylons>=0.9.6.2
 GitPython>=0.1.4
+SQLAlchemy>=0.4.6
+Elixir>=0.5.2

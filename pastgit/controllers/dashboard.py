@@ -17,5 +17,7 @@ class DashboardController(BaseController):
         post = variabledecode.variable_decode(request.POST)
         log.info("post: " + str(post))
 
-        return "Wow"
-        
+        if not post.get("fileContent"):
+            return "empty"
+
+        return "pasted"
