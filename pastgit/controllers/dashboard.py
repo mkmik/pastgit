@@ -15,12 +15,12 @@ class DashboardController(BaseController):
 
     @rest.dispatch_on(POST='_postPaste')
     def index(self):
-        c.fileId = 0
+        c.fileId = 1
         return render("newpaste")
 
     def pasteBox(self, id = None):
         if id == None:
-            c.fileId = 0
+            c.fileId = 1
         else:
             c.fileId = id
         return render("pasteBox")
@@ -45,3 +45,20 @@ class DashboardController(BaseController):
         paste = self.paster.get(id)
         c.blobs = paste.show()
         return render("showPaste")
+
+    @rest.dispatch_on(POST='_savePaste')
+    def edit(self, id):
+        c.pasteId = id
+        paste = self.paster.get(id)
+        c.blobs = paste.show()
+        return render("editPaste")
+
+    def _savePaste(self, id):
+        post = variabledecode.variable_decode(request.POST)
+
+        content = zip(xrange(10000),post.get("fileName"), post.get("fileContent"))
+
+        paste = self.paster.get(id)
+        paste.modify(content)
+
+        redirect_to(action="show")

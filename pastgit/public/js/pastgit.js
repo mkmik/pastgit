@@ -23,7 +23,7 @@ function showFileName(el) {
     $(el).prev().focus();
 }
 
-currentFileId = 1;
+currentFileId = 2;
 
 function addFile() {
     console.log("adding file");

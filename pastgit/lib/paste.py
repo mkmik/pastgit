@@ -36,3 +36,6 @@ class Paste(object):
     def show(self):
         self.repo = Repo(self.dirname)
         return [x for x in self.repo.tree().contents if x.name != ".gitignore"]
+
+    def modify(self, content):
+        log.info("todo: modify" + str(content))
