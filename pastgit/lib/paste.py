@@ -1,6 +1,6 @@
 import logging
 
-import os
+import os, shutil
 from git import *
 
 log = logging.getLogger(__name__)
@@ -30,6 +30,8 @@ class Paste(object):
         git.add(".")
         git.commit(message="initial")
         git.push("--all", repo="../../../" + self.dirname)
+
+        shutil.rmtree(self.wcname)
 
     def show(self):
         self.repo = Repo(self.dirname)
