@@ -56,7 +56,7 @@ class DashboardController(BaseController):
     def _savePaste(self, id):
         post = variabledecode.variable_decode(request.POST)
 
-        content = zip(xrange(10000),post.get("fileName"), post.get("fileContent"))
+        content = zip(post.get("fileName"), post.get("fileContent"))
 
         paste = self.paster.get(id)
         paste.modify(content)

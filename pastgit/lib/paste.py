@@ -39,3 +39,18 @@ class Paste(object):
 
     def modify(self, content):
         log.info("todo: modify" + str(content))
+
+        rep = Git(self.dirname)
+        rep.clone(".", "../../../" + self.wcname)
+        git = Git(self.wcname)
+
+        for fname, body in content:
+            f = open(self.wcname + "/" + fname, "w")
+            print >>f, body
+            f.close()
+
+        git.add(".")
+        git.commit(message="web edit")
+        git.push("--all", repo="../../../" + self.dirname)
+
+        shutil.rmtree(self.wcname)
