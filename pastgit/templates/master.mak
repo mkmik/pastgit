@@ -17,7 +17,7 @@
   <body>
     <div id="nav">
       <div align="right">
-	<a href="">New </a>
+	<a href="${h.url(controller="dashboard", action="index", id=None)()}">New </a>
       </div>
     </div>
 
