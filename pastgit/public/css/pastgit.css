@@ -25,6 +25,9 @@
     margin-right: 40px;
 }
 
+#content .fileContent {
+    margin-bottom: 10px;
+}
 
 #content .show .fileContent {
     background-color: #eee;
@@ -32,5 +35,4 @@
     padding: 1em;
     white-space: pre;
     font-family: 'Bitstream Vera Sans Mono','Courier',monospace;
-    margin-bottom: 10px;
 }
