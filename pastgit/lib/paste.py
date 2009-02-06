@@ -43,6 +43,10 @@ class Paste(object):
         rep = Git(self.dirname)
         rep.clone(".", "../../../" + self.wcname)
         git = Git(self.wcname)
+        wc = Repo(self.wcname)
+
+        for b in wc.tree().contents:
+            os.remove(self.wcname + "/" + b.name)
 
         for fname, body in content:
             f = open(self.wcname + "/" + fname, "w")
@@ -51,7 +55,7 @@ class Paste(object):
 
         if git.diff():
             git.add(".")
-            git.commit(message="web edit")
+            git.commit("-a", message="web edit")
             git.push("--all", repo="../../../" + self.dirname)
 
         shutil.rmtree(self.wcname)
