@@ -8,7 +8,7 @@
       <div class="languageBox ${namedClass}">
 	<span class="languageSelect">
 	Language:
-	<select name="language-${fid}">
+	<select name="language">
 	  %for suffix, name in c.languages:
 	  <% selected = suffix == blobName.split('.')[-1] and 'selected' or '' %>
 	  <option value="${suffix}" ${selected}>${name}</option>
@@ -19,7 +19,7 @@
       </div>
       <div class="fileNameBox">
 
-	<input class="fileName" name="fileName-${fid}" value="${blobName}" type="text"/>
+	<input class="fileName" name="fileName" value="${blobName}" type="text"/>
 %if not (not blobName or blobName.startswith("pastefile")):
 	<a class="fileName" href="#">${blobName}</a>
 %else:
@@ -28,6 +28,6 @@
       </div>
     </div>
     <div class="fileContent">
-      <textarea name="fileContent-${fid}">${blob}</textarea>
+      <textarea name="fileContent">${blob}</textarea>
     </div>
   </div>
