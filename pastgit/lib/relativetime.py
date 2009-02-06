@@ -16,10 +16,8 @@ def relative_time(tt):
     
     delta = now - date
 
-    print "delta", delta
-
     if delta < 60:
-        return u"less than a minutes ago"
+        return u"less than a minute ago"
     elif delta < 120:
         return u"about a minute ago"
     elif delta < _partialMinute:

@@ -43,10 +43,18 @@ class DashboardController(BaseController):
 
     def show(self, id, rev=None):
         c.pasteId = id
+
         paste = self.paster.get(id)
         c.blobs = paste.show()
 
-        c.history = [(x.id[0:5], x.id, relative_time(x.committed_date)) for x in paste.history()]
+        history = paste.history()
+        
+        c.currentRev = history[0].id
+        if rev:
+            c.currentRev = rev
+
+        c.history = [(x.id[0:5], x.id, relative_time(x.committed_date), c.currentRev == x.id and "current" or "other") for x in history]
+
         return render("showPaste")
 
     @rest.dispatch_on(POST='_savePaste')

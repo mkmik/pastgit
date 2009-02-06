@@ -3,7 +3,7 @@
 }
 
 #content .languageBox {
- float: right;
+  float: right; 
 }
 
 #content .file {
@@ -12,7 +12,7 @@
 
 #content .file textarea {
   height: 25em;
-  width: 100%;
+  width: 100%; 
 }
 
 #content .addFileButton {
@@ -35,4 +35,51 @@
     padding: 1em;
     white-space: pre;
     font-family: 'Bitstream Vera Sans Mono','Courier',monospace;
+}
+
+#content #sideBox {
+    float: right;
+    width: 180px;
+}
+
+#content .show {
+    margin-right: 180px;
+}
+
+#content #history ul {
+    padding: 0px;
+
+    list-style-type: none;
+    font-family:helvetica,arial,clean,sans-serif;
+    font-size:13.34px;
+}
+
+#content #history li * {
+    vertical-align: middle;
+}
+
+#content #history li a {
+    color: blue;
+    text-decoration: none;
+    font-family: Monaco,"Courier New",monospace;
+    font-size:70%;
+}
+
+#content #history li a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+#content #history li {
+    color: #777;
+    padding: 4px;
+}
+
+#content #history li.current {
+    background-color: #eefeee;
+    border: 1px solid #9efe9e;
+}
+
+#content #history li.other {
+    padding: 5px;
 }
