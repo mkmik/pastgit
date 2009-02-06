@@ -9,7 +9,8 @@
 	<span class="languageSelect">
 	Language:
 	<select name="language-${fid}">
-	  %for suffix, name, selected in c.languages:
+	  %for suffix, name in c.languages:
+	  <% selected = suffix == blobName.split('.')[-1] and 'selected' or '' %>
 	  <option value="${suffix}" ${selected}>${name}</option>
 	  %endfor
 	</select>

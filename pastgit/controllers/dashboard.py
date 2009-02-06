@@ -94,7 +94,7 @@ class DashboardController(BaseController):
         return zip(count(), post.get("fileName"), post.get("fileContent"), post.get("language"))
 
     def _prepareLanguages(self):
-        c.languages = [(x[0], x[1], x[0] == "txt" and "selected" or "") for x in self.languages.iteritems()]
+        c.languages = self.languages.iteritems()
 
     def _highlightBlob(self, blob):
         res = HighlightedBlob()
