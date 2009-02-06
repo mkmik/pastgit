@@ -49,8 +49,9 @@ class Paste(object):
             print >>f, body
             f.close()
 
-        git.add(".")
-        git.commit(message="web edit")
-        git.push("--all", repo="../../../" + self.dirname)
+        if git.diff():
+            git.add(".")
+            git.commit(message="web edit")
+            git.push("--all", repo="../../../" + self.dirname)
 
         shutil.rmtree(self.wcname)
