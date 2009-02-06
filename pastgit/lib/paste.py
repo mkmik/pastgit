@@ -1,6 +1,6 @@
 import logging
 
-import os, shutil
+import os, os.path, shutil
 from git import *
 
 log = logging.getLogger(__name__)
@@ -9,7 +9,7 @@ class Paste(object):
     def __init__(self, base, id):
         self.base = base
         self.id = id
-        self.dirname = base + "/" + str(id) + ".git"
+        self.dirname = os.path.abspath(base + "/" + str(id) + ".git")
         self.wcname = self.dirname + "-wc"
 
     def create(self, content):
@@ -23,7 +23,7 @@ class Paste(object):
 
         git.add(".")
         git.commit(message="initial")
-        git.push("--all", repo="../../../" + self.dirname)
+        git.push("--all", repo=self.dirname)
 
         shutil.rmtree(self.wcname)
 
@@ -41,7 +41,7 @@ class Paste(object):
         log.info("todo: modify" + str(content))
 
         rep = Git(self.dirname)
-        rep.clone(".", "../../../" + self.wcname)
+        rep.clone(".", self.wcname)
 
         git = Git(self.wcname)
         wc = Repo(self.wcname)
@@ -54,7 +54,7 @@ class Paste(object):
         if git.diff():
             git.add(".")
             git.commit("-a", message="web edit")
-            git.push("--all", repo="../../../" + self.dirname)
+            git.push("--all", repo=self.dirname)
 
         shutil.rmtree(self.wcname)
 

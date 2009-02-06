@@ -21,6 +21,8 @@ function showFileName(el) {
     $(el).css("display", "none");
     $(el).prev().css("display", "block");
     $(el).prev().focus();
+
+    $(".languageBox", $(el).parent().parent()).addClass("named");
 }
 
 currentFileId = 2;

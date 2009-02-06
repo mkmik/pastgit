@@ -95,3 +95,15 @@
 #content #history li.other {
     padding: 5px;
 }
+
+#content .languageBox.named span.languageSelect {
+    display: none;
+}
+
+#content .languageBox span.languageAuto {
+    display: none;
+}
+
+#content .languageBox.named span.languageAuto {
+    display: block;
+}
