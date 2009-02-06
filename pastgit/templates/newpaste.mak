@@ -4,7 +4,7 @@
 
 ${h.start_form(h.url())}
 <div id="files">
-<%include file="pasteBox.mak" args="fid=c.fileId"/>
+<%include file="pasteBox.mak"/>
 </div>
 <div id="pasteButtons">
   <div class="addFileButton">

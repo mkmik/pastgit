@@ -25,11 +25,9 @@ function showFileName(el) {
     $(".languageBox", $(el).parent().parent()).addClass("named");
 }
 
-currentFileId = 2;
-
 function addFile() {
     console.log("adding file");
-    $.get("/dashboard/pasteBox/" + currentFileId++, {}, function(data) {
+    $.get("/dashboard/pasteBox", {}, function(data) {
 	    $("#files").append(data);
 	    setupEvents($("#files .file:last-child"));
 	});

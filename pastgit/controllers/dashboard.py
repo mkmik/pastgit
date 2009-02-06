@@ -30,16 +30,10 @@ class DashboardController(BaseController):
 
     @rest.dispatch_on(POST='_postPaste')
     def index(self):
-        c.fileId = 1
         self._prepareLanguages()
         return render("newpaste")
 
     def pasteBox(self, id = None):
-        if id == None:
-            c.fileId = 1
-        else:
-            c.fileId = id
-
         self._prepareLanguages()
         return render("pasteBox")
 

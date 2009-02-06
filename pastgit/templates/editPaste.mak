@@ -7,8 +7,8 @@
 
 ${h.start_form(h.url())}
 <div id="files" class="edit">
-% for fid, b in zip(count(), c.blobs):
-<%include file="pasteBox.mak" args="blob=b.data, blobName=b.name, fid=fid"/>
+% for b in c.blobs:
+<%include file="pasteBox.mak" args="blob=b.data, blobName=b.name"/>
 %endfor
 </div>
 <div id="pasteButtons">
