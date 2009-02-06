@@ -59,13 +59,13 @@ class Paste(object):
         shutil.rmtree(self.wcname)
 
     def writeContent(self, content):
-        for pos, name, body in content:
+        for pos, name, body, language in content:
             fname = name
             if not fname:
-                fname = self.createDefaultName(pos)
+                fname = self.createDefaultName(pos, language)
             f = open(self.wcname + "/" + fname, "w")
             print >>f, body
             f.close()
 
-    def createDefaultName(self, pos):
-        return "pastefile" + str(pos)
+    def createDefaultName(self, pos, language):
+        return "pastefile" + str(pos) + "." + language
