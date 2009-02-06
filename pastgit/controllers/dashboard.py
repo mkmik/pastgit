@@ -85,9 +85,9 @@ class DashboardController(BaseController):
         redirect_to(controller="/dashboard", id=id, action="show", rev=None)
 
     def _contentFromPost(self, requestPost):
-        post = variabledecode.variable_decode(request.POST)
+        post = request.POST 
 
-        res = zip(count(), post.get("fileName"), post.get("fileContent"), post.get("language"))
+        res = zip(count(), post.getall("fileName"), post.getall("fileContent"), post.getall("language"))
 
         log.info("content from post" + str(res))
         return res
