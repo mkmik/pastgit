@@ -61,11 +61,14 @@ class Paste(object):
     def writeContent(self, content):
         for pos, name, body, language in content:
             fname = name
-            if not fname:
+            if self.isDefaultName(fname):
                 fname = self.createDefaultName(pos, language)
             f = open(self.wcname + "/" + fname, "w")
             print >>f, body
             f.close()
+
+    def isDefaultName(self, name):
+        return not name or name.startswith("pastefile")
 
     def createDefaultName(self, pos, language):
         return "pastefile" + str(pos) + "." + language
