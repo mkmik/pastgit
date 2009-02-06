@@ -51,7 +51,7 @@ class Paste(object):
 
         self.writeContent(content)
 
-        git.add(".")
+        git.add("--ignore-errors", ".")
         if git.diff("--cached"):
             git.commit("-a", message="web edit")
             git.push("--all", repo=self.dirname)
