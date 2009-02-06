@@ -2,6 +2,15 @@
   display: none;
 }
 
+#content .fileName {
+    font-family: Monaco,"Courier New",monospace;
+    font-size: 13px;
+}
+
+#content div.fileName:after {
+    content: ':';
+}
+
 #content .languageBox {
   float: right; 
 }
@@ -58,16 +67,19 @@
     vertical-align: middle;
 }
 
-#content #history li a {
+#content a {
     color: blue;
     text-decoration: none;
-    font-family: Monaco,"Courier New",monospace;
-    font-size:70%;
 }
 
-#content #history li a:hover {
+#content a:hover {
     color: blue;
     text-decoration: underline;
+}
+
+#content #history li a {
+    font-family: Monaco,"Courier New",monospace;
+    font-size:70%;
 }
 
 #content #history li {

@@ -19,13 +19,7 @@ class Paste(object):
         git = Git(self.wcname)
         git.init()
 
-        for pos, name, body in content:
-            fname = name
-            if not fname:
-                fname = "pastefile" + str(pos)
-            f = open(self.wcname + "/" + fname, "w")
-            print >>f, body
-            f.close()
+        self.writeContent(content)
 
         git.add(".")
         git.commit(message="initial")
@@ -48,16 +42,14 @@ class Paste(object):
 
         rep = Git(self.dirname)
         rep.clone(".", "../../../" + self.wcname)
+
         git = Git(self.wcname)
         wc = Repo(self.wcname)
 
         for b in wc.tree().contents:
             os.remove(self.wcname + "/" + b.name)
 
-        for fname, body in content:
-            f = open(self.wcname + "/" + fname, "w")
-            print >>f, body
-            f.close()
+        self.writeContent(content)
 
         if git.diff():
             git.add(".")
@@ -65,3 +57,15 @@ class Paste(object):
             git.push("--all", repo="../../../" + self.dirname)
 
         shutil.rmtree(self.wcname)
+
+    def writeContent(self, content):
+        for pos, name, body in content:
+            fname = name
+            if not fname:
+                fname = self.createDefaultName(pos)
+            f = open(self.wcname + "/" + fname, "w")
+            print >>f, body
+            f.close()
+
+    def createDefaultName(self, pos):
+        return "pastefile" + str(pos)
