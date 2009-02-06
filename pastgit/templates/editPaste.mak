@@ -1,11 +1,14 @@
 <%inherit file="master.mak"/>
+<%!
+    from itertools import count
+%>
 
 <%def name="title()">Edit Paste</%def>
 
 ${h.start_form(h.url())}
 <div id="files" class="edit">
-% for fid,b in zip(xrange(1, 10000), c.blobs):
-<%include file="pasteBox.mak" args="b=b, fid=fid"/>
+% for fid, b in zip(count(), c.blobs):
+<%include file="pasteBox.mak" args="blob=b.data, blobName=b.name, fid=fid"/>
 %endfor
 </div>
 <div id="pasteButtons">

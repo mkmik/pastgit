@@ -4,6 +4,7 @@ from pastgit.lib.base import *
 from pastgit.lib.pasterdao import *
 from pylons.decorators import rest
 
+from itertools import count
 from formencode import variabledecode
 
 log = logging.getLogger(__name__)
@@ -32,7 +33,7 @@ class DashboardController(BaseController):
         if not post.get("fileContent"):
             return "empty"
 
-        initial = zip(xrange(10000),post.get("fileName"), post.get("fileContent"))
+        initial = zip(count(), post.get("fileName"), post.get("fileContent"))
         log.info(initial)
 
         paste = self.paster.create(initial)
