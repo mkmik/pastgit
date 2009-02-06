@@ -2,6 +2,10 @@
 
 <%def name="title()">Show paste</%def>
 
+<style type="text/css">
+  ${c.highlighterStyles}
+</style>
+
 <div id="sideBox">
   <div id="history">
     <h3>History</h3>

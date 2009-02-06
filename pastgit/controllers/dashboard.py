@@ -8,7 +8,14 @@ from itertools import count
 from formencode import variabledecode
 from pastgit.lib.relativetime import *
 
+from pygments import highlight
+from pygments.lexers import get_lexer_by_name, guess_lexer_for_filename, guess_lexer
+from pygments.formatters import HtmlFormatter
+
 log = logging.getLogger(__name__)
+
+class HighlightedBlob(object):
+    pass
 
 class DashboardController(BaseController):
 
@@ -35,16 +42,9 @@ class DashboardController(BaseController):
         return render("pasteBox")
 
     def _postPaste(self):
-        post = variabledecode.variable_decode(request.POST)
-        log.info("post: " + str(post))
+        content = self._contentFromPost(request.POST)
 
-        if not post.get("fileContent"):
-            return "empty"
-
-        initial = zip(count(), post.get("fileName"), post.get("fileContent"))
-        log.info(initial)
-
-        paste = self.paster.create(initial)
+        paste = self.paster.create(content)
         c.pasteId = paste.id
 
         return render("pasted")
@@ -55,6 +55,8 @@ class DashboardController(BaseController):
         paste = self.paster.get(id)
         c.blobs = paste.show(rev)
 
+        c.blobs = [self._highlightBlob(x) for x in c.blobs]
+
         history = paste.history()
         
         c.currentRev = history[0].id
@@ -64,6 +66,8 @@ class DashboardController(BaseController):
         c.history = [(x.id[0:5], x.id, relative_time(x.committed_date), c.currentRev == x.id and "current" or "other") for x in history]
 
         c.editable =  c.currentRev == history[0].id
+
+        c.highlighterStyles = HtmlFormatter().get_style_defs('.fileContent')
 
         return render("showPaste")
 
@@ -77,14 +81,39 @@ class DashboardController(BaseController):
         return render("editPaste")
 
     def _savePaste(self, id):
-        post = variabledecode.variable_decode(request.POST)
-
-        content = zip(count(), post.get("fileName"), post.get("fileContent"))
+        content = self._contentFromPost(request.POST)
 
         paste = self.paster.get(id)
         paste.modify(content)
 
         redirect_to(controller="/dashboard", id=id, action="show", rev=None)
 
+    def _contentFromPost(self, requestPost):
+        post = variabledecode.variable_decode(request.POST)
+
+        return zip(count(), post.get("fileName"), post.get("fileContent"))
+
     def _prepareLanguages(self):
         c.languages = [(x[0], x[1], x[0] == "txt" and "selected" or "") for x in self.languages.iteritems()]
+
+    def _highlightBlob(self, blob):
+        res = HighlightedBlob()
+
+        res.id = blob.id
+        res.name = blob.name
+        res.data = blob.data
+
+        try:
+            lexer = guess_lexer_for_filename(blob.name, blob.data)
+        except:
+            try:
+                lexer = guess_lexer(blob.data)
+            except:
+                lexer = get_lexer_by_name("text")
+
+        formatter = HtmlFormatter(cssclass="source")
+        result = highlight(blob.data, lexer, formatter)
+
+        res.data = result
+
+        return res

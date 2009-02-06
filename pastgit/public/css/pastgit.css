@@ -41,8 +41,8 @@
 #content .show .fileContent {
     background-color: #eee;
     border: 1px solid #ddd;
-    padding: 1em;
-    white-space: pre;
+    padding-left: 1em; 
+    /* white-space: pre; */
     font-family: 'Bitstream Vera Sans Mono','Courier',monospace;
 }
 
