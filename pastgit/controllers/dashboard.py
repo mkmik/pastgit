@@ -5,6 +5,7 @@ from pastgit.lib.pasterdao import *
 from pylons.decorators import rest
 
 from formencode import variabledecode
+from pastgit.lib.relativetime import *
 
 log = logging.getLogger(__name__)
 
@@ -40,10 +41,12 @@ class DashboardController(BaseController):
 
         return render("pasted")
 
-    def show(self, id):
+    def show(self, id, rev=None):
         c.pasteId = id
         paste = self.paster.get(id)
         c.blobs = paste.show()
+
+        c.history = [(x.id[0:5], x.id, relative_time(x.committed_date)) for x in paste.history()]
         return render("showPaste")
 
     @rest.dispatch_on(POST='_savePaste')
@@ -61,4 +64,4 @@ class DashboardController(BaseController):
         paste = self.paster.get(id)
         paste.modify(content)
 
-        redirect_to(action="show")
+        redirect_to(controller="/dashboard", id=id, action="show", rev=None)

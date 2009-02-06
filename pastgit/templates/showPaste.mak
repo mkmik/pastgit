@@ -12,6 +12,16 @@
   </div>
 %endfor
 </div>
+<div id="sideBox">
+  <div id="history">
+    <h3>History</h3>
+    <ul>
+%for short, id, date in c.history:
+      <li><a href="${id}">${short} - ${date}</a></li>
+%endfor
+    </ul>
+  </div>
+</div>
 <div id="pasteButtons">
   <div class="pasteButton">
     <form action="${h.url(action="edit")()}" method="get">
