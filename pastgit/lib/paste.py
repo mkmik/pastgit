@@ -33,9 +33,11 @@ class Paste(object):
 
         shutil.rmtree(self.wcname)
 
-    def show(self):
+    def show(self, rev=None):
+        if not rev:
+            rev = "master"
         self.repo = Repo(self.dirname)
-        return [x for x in self.repo.tree().contents if x.name != ".gitignore"]
+        return [x for x in self.repo.tree(rev).contents if x.name != ".gitignore"]
 
     def history(self):
         self.repo = Repo(self.dirname)

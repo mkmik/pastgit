@@ -46,7 +46,7 @@ class DashboardController(BaseController):
         c.pasteId = id
 
         paste = self.paster.get(id)
-        c.blobs = paste.show()
+        c.blobs = paste.show(rev)
 
         history = paste.history()
         
@@ -55,6 +55,8 @@ class DashboardController(BaseController):
             c.currentRev = rev
 
         c.history = [(x.id[0:5], x.id, relative_time(x.committed_date), c.currentRev == x.id and "current" or "other") for x in history]
+
+        c.editable =  c.currentRev == history[0].id
 
         return render("showPaste")
 

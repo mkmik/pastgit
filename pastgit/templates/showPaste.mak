@@ -14,7 +14,7 @@
 </div>
 
 <div id="files" class="show">
-% for b in c.blobs:
+%for b in c.blobs:
   <div class="file">
     <div class="fileName">
       ${b.name}
@@ -24,9 +24,11 @@
 %endfor
 </div>
 <div id="pasteButtons">
+%if c.editable:
   <div class="pasteButton">
     <form action="${h.url(action="edit")()}" method="get">
       <input type="submit" value="Edit"/>
     </form>
   </div>
+%endif
 </div>
