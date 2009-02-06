@@ -12,12 +12,19 @@ log = logging.getLogger(__name__)
 
 class DashboardController(BaseController):
 
+    languages = dict(txt = "Plain Text",
+                     java = "Java",
+                     js = "JavaScript",
+                     css = "CSS",
+                     xml = "XML")
+
     def __init__(self):
         self.paster = PasterDao()
 
     @rest.dispatch_on(POST='_postPaste')
     def index(self):
         c.fileId = 1
+        self._prepareLanguages()
         return render("newpaste")
 
     def pasteBox(self, id = None):
@@ -63,6 +70,8 @@ class DashboardController(BaseController):
     @rest.dispatch_on(POST='_savePaste')
     def edit(self, id):
         c.pasteId = id
+        self._prepareLanguages()
+
         paste = self.paster.get(id)
         c.blobs = paste.show()
         return render("editPaste")
@@ -76,3 +85,6 @@ class DashboardController(BaseController):
         paste.modify(content)
 
         redirect_to(controller="/dashboard", id=id, action="show", rev=None)
+
+    def _prepareLanguages(self):
+        c.languages = [(x[0], x[1], x[0] == "txt" and "selected" or "") for x in self.languages.iteritems()]

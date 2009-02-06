@@ -9,8 +9,9 @@
 	<span class="languageSelect">
 	Language:
 	<select name="language-${fid}">
-	  <option value="text">plain text</option>
-	  <option value="java">java</option>
+	  %for suffix, name, selected in c.languages:
+	  <option value="${suffix}" ${selected}>${name}</option>
+	  %endfor
 	</select>
 	</span>
 	<span class="languageAuto">language detected from file extension</span>
