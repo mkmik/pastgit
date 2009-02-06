@@ -39,6 +39,8 @@ class DashboardController(BaseController):
             c.fileId = 1
         else:
             c.fileId = id
+
+        self._prepareLanguages()
         return render("pasteBox")
 
     def _postPaste(self):
@@ -91,10 +93,13 @@ class DashboardController(BaseController):
     def _contentFromPost(self, requestPost):
         post = variabledecode.variable_decode(request.POST)
 
-        return zip(count(), post.get("fileName"), post.get("fileContent"), post.get("language"))
+        res = zip(count(), post.get("fileName"), post.get("fileContent"), post.get("language"))
+
+        log.info("content from post" + str(res))
+        return res
 
     def _prepareLanguages(self):
-        c.languages = self.languages.iteritems()
+        c.languages = self.languages.items()
 
     def _highlightBlob(self, blob):
         res = HighlightedBlob()
