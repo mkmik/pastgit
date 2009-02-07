@@ -46,7 +46,7 @@ class Paste(object):
         git = Git(self.wcname)
         wc = Repo(self.wcname)
 
-        for b in wc.tree().contents:
+        for b in wc.tree().values():
             os.remove(self.wcname + "/" + b.name)
 
         self.writeContent(content)
