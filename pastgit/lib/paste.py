@@ -31,7 +31,7 @@ class Paste(object):
         if not rev:
             rev = "master"
         self.repo = Repo(self.dirname)
-        return [x for x in self.repo.tree(rev).contents if x.name != ".gitignore"]
+        return self.repo.tree(rev).values()
 
     def history(self):
         self.repo = Repo(self.dirname)
