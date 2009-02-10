@@ -116,3 +116,7 @@ class DashboardController(BaseController):
         res.data = result
 
         return res
+
+    def list(self):
+        c.ids = self.paster.list()
+        return render('list')

@@ -18,6 +18,7 @@
     <div id="nav">
       <div align="right">
 	<a href="${h.url(controller="dashboard", action="index", id=None, rev=None)()}">New </a>
+	<a href="${h.url(controller="/dashboard", action="list")()}">Recent </a>
       </div>
     </div>
 

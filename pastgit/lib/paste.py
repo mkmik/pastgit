@@ -17,9 +17,15 @@ class Paste(object):
         """
         self.wcname = tempfile.mkdtemp("wc")
 
+    def touch(self):
+        f = file(self.dirname + "/modified", "w")
+        print >>f, ""
+        f.close()
+
     def create(self, content):
         self.repo = Repo.create(self.dirname)
-        
+        self.touch()
+
         self.mkwc()
         try:
             git = Git(self.wcname)
@@ -65,6 +71,8 @@ class Paste(object):
             if git.diff("--cached"):
                 git.commit("-a", message="web edit")
                 git.push("--all", repo=self.dirname)
+
+            self.touch()
         finally:
             shutil.rmtree(self.wcname)
 
