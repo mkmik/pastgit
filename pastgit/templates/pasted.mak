@@ -2,4 +2,4 @@
 
 <%def name="title()">Pasted</%def>
 
-<p>Copy this link: <a href="${h.url(action="show",id=c.pasteId)()}">${c.pasteId}</a></p>
+<p>Copy this link: <a href="${h.url(controller="/dashboard", action="show", id=c.pasteId, rev=None)()}">${c.pasteId}</a></p>
