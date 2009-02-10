@@ -10,22 +10,30 @@ class Paste(object):
         self.base = base
         self.id = id
         self.dirname = os.path.abspath(base + "/" + str(id) + ".git")
+
+    def mkwc(self):
+        """
+        creates the working copy directory
+        """
         self.wcname = self.dirname + "-wc"
+        os.mkdir(self.wcname)
 
     def create(self, content):
         self.repo = Repo.create(self.dirname)
         
-        os.mkdir(self.wcname)
-        git = Git(self.wcname)
-        git.init()
+        self.mkwc()
+        try:
+            git = Git(self.wcname)
+            git.init()
 
-        self.writeContent(content)
+            self.writeContent(content)
 
-        git.add(".")
-        git.commit(message="initial")
-        git.push("--all", repo=self.dirname)
+            git.add(".")
+            git.commit(message="initial")
+            git.push("--all", repo=self.dirname)
 
-        shutil.rmtree(self.wcname)
+        finally:
+            shutil.rmtree(self.wcname)
 
     def show(self, rev=None):
         if not rev:
@@ -40,23 +48,26 @@ class Paste(object):
     def modify(self, content):
         log.info("todo: modify" + str(content))
 
-        rep = Git(self.dirname)
-        rep.clone(".", self.wcname)
+        self.mkwc()
+        shutil.rmtree(self.wcname) # aaargh
+        try:
+            rep = Git(self.dirname)
+            rep.clone(".", self.wcname)
 
-        git = Git(self.wcname)
-        wc = Repo(self.wcname)
+            git = Git(self.wcname)
+            wc = Repo(self.wcname)
 
-        for b in wc.tree().values():
-            os.remove(self.wcname + "/" + b.name)
+            for b in wc.tree().values():
+                os.remove(self.wcname + "/" + b.name)
 
-        self.writeContent(content)
+            self.writeContent(content)
 
-        git.add("--ignore-errors", ".")
-        if git.diff("--cached"):
-            git.commit("-a", message="web edit")
-            git.push("--all", repo=self.dirname)
-
-        shutil.rmtree(self.wcname)
+            git.add("--ignore-errors", ".")
+            if git.diff("--cached"):
+                git.commit("-a", message="web edit")
+                git.push("--all", repo=self.dirname)
+        finally:
+            shutil.rmtree(self.wcname)
 
     def writeContent(self, content):
         for pos, name, body, language in content:
