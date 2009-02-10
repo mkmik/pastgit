@@ -1,6 +1,6 @@
 import logging
 
-import os, os.path, shutil
+import os, os.path, shutil, tempfile
 from git import *
 
 log = logging.getLogger(__name__)
@@ -15,8 +15,7 @@ class Paste(object):
         """
         creates the working copy directory
         """
-        self.wcname = self.dirname + "-wc"
-        os.mkdir(self.wcname)
+        self.wcname = tempfile.mkdtemp("wc")
 
     def create(self, content):
         self.repo = Repo.create(self.dirname)
