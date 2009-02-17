@@ -1,4 +1,4 @@
-console.log("loading");
+// console.log("loading");
 
 function setupEvents(context) {
     $("a.fileName", context).click(function() {
@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 
 function showFileName(el) {
-    console.log("show file name " + el);
+    //    console.log("show file name " + el);
 
     $(el).css("display", "none");
     $(el).prev().css("display", "block");
@@ -26,7 +26,7 @@ function showFileName(el) {
 }
 
 function addFile() {
-    console.log("adding file");
+    //    console.log("adding file");
     $.get("/dashboard/pasteBox", {}, function(data) {
 	    $("#files").append(data);
 	    setupEvents($("#files .file:last-child"));
