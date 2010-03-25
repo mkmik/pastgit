@@ -108,3 +108,7 @@
 #content .languageBox.named span.languageAuto {
     display: block;
 }
+
+#content .source pre {
+    overflow-x: scroll;
+}
