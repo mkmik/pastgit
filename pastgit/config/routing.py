@@ -20,6 +20,8 @@ def make_map():
 
     map.connect('', controller="dashboard")
     map.connect(':controller/:action/:id')
+    map.connect(':id/:rev/raw/:file', controller="dashboard", action="raw", rev=None)
+    map.connect(':id/raw/:file', controller="dashboard", action="raw", rev=None)
     map.connect(':id/:rev', controller="dashboard", action="show", rev=None)
 
     map.connect('*url', controller='template', action='view')

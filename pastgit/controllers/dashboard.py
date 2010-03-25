@@ -45,6 +45,16 @@ class DashboardController(BaseController):
 
         return render("pasted")
 
+    def raw(self, id, rev=None, file=None):
+        c.pasteId = id
+
+        paste = self.paster.get(id)
+        c.blobs = paste.show(rev)
+
+        response.headers['content-type'] = 'text/xml; charset=utf-8'
+
+        return str([x.data for x in c.blobs if x.name == file][0])
+
     def show(self, id, rev=None):
         c.pasteId = id
 

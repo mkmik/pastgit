@@ -5,6 +5,7 @@
 #content .fileName {
     font-family: Monaco,"Courier New",monospace;
     font-size: 13px;
+    display: inline;
 }
 
 #content div.fileName:after {
