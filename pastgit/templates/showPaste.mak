@@ -20,7 +20,10 @@
 <div id="files" class="show">
 %for b in c.blobs:
   <div class="file">
-    <div class="fileName">${b.name}</div>
+    <div>
+        <div class="fileName">${b.name}</div>
+        <span><a href="javascript:window.location=window.location+'/raw/${b.name}'">raw</a></span>
+    </div>
     <div class="fileContent">${b.data}</div>
   </div>
 %endfor

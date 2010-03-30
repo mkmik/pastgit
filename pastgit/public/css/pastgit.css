@@ -5,6 +5,7 @@
 #content .fileName {
     font-family: Monaco,"Courier New",monospace;
     font-size: 13px;
+    display: inline;
 }
 
 #content div.fileName:after {
@@ -106,4 +107,8 @@
 
 #content .languageBox.named span.languageAuto {
     display: block;
+}
+
+#content .source pre {
+    overflow-x: scroll;
 }

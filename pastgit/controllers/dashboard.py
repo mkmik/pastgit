@@ -46,6 +46,16 @@ class DashboardController(BaseController):
 
         return render("pasted")
 
+    def raw(self, id, rev=None, file=None):
+        c.pasteId = id
+
+        paste = self.paster.get(id)
+        c.blobs = paste.show(rev)
+
+        response.headers['content-type'] = 'text/xml; charset=utf-8'
+
+        return str([x.data for x in c.blobs if x.name == file][0])
+
     def show(self, id, rev=None):
         c.pasteId = id
 
@@ -104,7 +114,7 @@ class DashboardController(BaseController):
         res.data = blob.data
 
         try:
-            lexer = guess_lexer_for_filename(blob.name, blob.data)
+            lexer = guess_lexer_for_filename(blob.name, blob.data[0:1000])
         except:
             try:
                 lexer = guess_lexer(blob.data)
