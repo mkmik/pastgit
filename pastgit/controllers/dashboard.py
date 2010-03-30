@@ -113,7 +113,7 @@ class DashboardController(BaseController):
         res.data = blob.data
 
         try:
-            lexer = guess_lexer_for_filename(blob.name, blob.data)
+            lexer = guess_lexer_for_filename(blob.name, blob.data[0:1000])
         except:
             try:
                 lexer = guess_lexer(blob.data)
