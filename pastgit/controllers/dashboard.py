@@ -23,7 +23,8 @@ class DashboardController(BaseController):
                      java = "Java",
                      js = "JavaScript",
                      css = "CSS",
-                     xml = "XML")
+                     xml = "XML",
+                     href = "hyperlink")
 
     def __init__(self):
         self.paster = PasterDao()
